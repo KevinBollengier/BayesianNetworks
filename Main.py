@@ -33,5 +33,3 @@ for node in nodes:
     # make node with all the names in nodes list, but init with empty parents list, empty dict
     bay_node = Node(node, [], {})
     bay_net.add_node(bay_node)
-
-print(bay_net)
