@@ -10,7 +10,7 @@ bay_net = BayesNetwork()
 for line in fileinput.input():
     lines.append(line)
 
-nodes = lines[0].strip().split(',')
+nodes = lines[0].strip().split(', ')
 amount_probabilities = int(lines[1].strip())
 
 prob_index = 2
@@ -34,3 +34,4 @@ for node in nodes:
     bay_node = Node(node, [], {})
     bay_net.add_node(bay_node)
 
+print(bay_net)

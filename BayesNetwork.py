@@ -6,8 +6,7 @@ class BayesNetwork:
         self.nodes.append(node)
 
     def __repr__(self):
-        for node in self.nodes:
-            return str(node)
+        return '\n'.join([str(n) for n in self.nodes])
 
 
 class Node:
