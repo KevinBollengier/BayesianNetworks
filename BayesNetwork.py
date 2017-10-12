@@ -6,7 +6,7 @@ class BayesNetwork:
         self.nodes.append(node)
 
 
-class VariableNode:
+class Node:
     def __init__(self, name, parents, prob_table):
         self.name = name
         self.parents = parents
