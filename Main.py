@@ -53,7 +53,6 @@ def set_parents():
             while parent_index < len(sublist):
                 node_el.parents.append(sublist[parent_index])
                 parent_index += 1
-    print(bay_net)
     # first_sub = [x[0].strip() for x in list_return]
     # print(first_sub)
     # voor elk element in de lijst 'list_return' neem ik de eerste value van het element,
@@ -63,6 +62,17 @@ def set_parents():
     # voor elk element in de lijst 'bay_net.nodes' kijk ik als de 'name' van het element in de lijst 'first_sub' zit.
     # Alle resultaten steek ik in een nieuwe lijst
     # = list comprehension
+
+
+def set_prob_tables():
+    for probability in probabilities:
+        key = probability[0].strip(" ").split("|")
+        print(key)
+    # for sublist in node_names_unique:
+    #     node_el = search_node(sublist[0])
+    #     for probability in probabilities:
+    #         trim = probability.strip(" ").strip("+").strip("-")
+    #         print(trim)
 
 
 def search_node(name)->Node:
@@ -79,4 +89,5 @@ def parse_queries():
     pass
 
 
-set_parents()
+# set_parents()
+set_prob_tables()
