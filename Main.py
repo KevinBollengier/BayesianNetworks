@@ -66,14 +66,26 @@ def search_node(name)->Node:
             return node_el
 
 
-def enumeration(queries , probabilities):
+def parse_queries(queries_list):
+    for query in queries_list:
+        check_existing_probabilities(query)
     pass
 
 
-def parse_queries():
+def check_existing_probabilities(query):
+    print(query)
+    pass
+
+
+def enumeration_algorithm():
+    pass
+
+
+def find_complement():
     pass
 
 
 set_parents()
 set_prob_tables()
-print(bay_net)
+parse_queries(queries)
+# print(bay_net)
