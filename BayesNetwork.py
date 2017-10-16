@@ -6,7 +6,8 @@ class BayesNetwork:
         self.nodes.append(node)
 
     def __repr__(self):
-        return '\n'.join([str(n) for n in self.nodes])
+        for node in self.nodes:
+            print(str(node))
 
 
 class Node:
@@ -16,4 +17,5 @@ class Node:
         self.prob_table = prob_table
 
     def __repr__(self):
-        return "<%s has as parents: %s and as probability table %s" % (self.name, self.parents, self.prob_table)
+        # return self.name, self.parents, self.prob_table
+        return "<%s has as parents: %s and as probability table %s >" % (self.name, self.parents, self.prob_table)
