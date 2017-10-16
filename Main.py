@@ -37,32 +37,18 @@ for node in nodes:
 
 
 def set_parents():
-    temp_list = []
     for probability in probabilities:
-        split = probability[0].split("|")
-        node_nameslist = [x.strip("+").strip("-").strip(" ") for x in split]
-        temp_list.append(node_nameslist)
-    for prob_node in temp_list:
-        if prob_node not in node_names_unique:
-            node_names_unique.append(prob_node)
-    # print(node_names_unique)
-    for sublist in node_names_unique:
-        if len(sublist) > 1:
-            node_el = search_node(sublist[0])
-            parent_index = 1
-            while parent_index < len(sublist):
-                node_el.parents.append(sublist[parent_index])
-                parent_index += 1
-
-    # first_sub = [x[0].strip() for x in list_return]
-    # print(first_sub)
-    # voor elk element in de lijst 'list_return' neem ik de eerste value van het element,
-    #  en strip ik de whitespaces/newlines.
-    # Resulaten in nieuwe lijst
-    # print([node for node in bay_net.nodes if node.name in first_sub])
-    # voor elk element in de lijst 'bay_net.nodes' kijk ik als de 'name' van het element in de lijst 'first_sub' zit.
-    # Alle resultaten steek ik in een nieuwe lijst
-    # = list comprehension
+        hey = probability[0].replace('|', ',')
+        hey = hey.replace('+', ' ')
+        hey = hey.replace('-', ' ')
+        hey = hey.strip(" ")
+        hey = hey.split(", ")
+        node_el = search_node(hey[0])
+        count = 1
+        while count < len(hey):
+            if hey[count] not in node_el.parents:
+                node_el.parents.append(hey[count])
+            count += 1
 
 
 def set_prob_tables():
@@ -72,23 +58,6 @@ def set_prob_tables():
         node = search_node(keys[0][1:])
         if node.name == keys[0][1:]:
             node.prob_table.append((keys, value))
-        #    count = 1
-        #     while count < len(keys):
-        #         if keys[0][:1] == '+':
-        #             temp_key = '-' + keys[0][1:]
-        #             temp_key.append(keys[count])
-        #         else:
-        #             temp_key = '+' + keys[0][1:]
-        #             temp_key.append(keys[count])
-        #         count += 1
-        # node.prob_table.append((temp_key, 1-value))
-    print(bay_net)
-
-    # for sublist in node_names_unique:
-    #     node_el = search_node(sublist[0])
-    #     for probability in probabilities:
-    #         trim = probability.strip(" ").strip("+").strip("-")
-    #         print(trim)
 
 
 def search_node(name)->Node:
@@ -107,4 +76,4 @@ def parse_queries():
 
 set_parents()
 set_prob_tables()
-# print(bay_net)
+print(bay_net)
