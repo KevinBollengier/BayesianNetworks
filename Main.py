@@ -32,7 +32,7 @@ while query_index < len(lines):
 
 for node in nodes:
     # make node with all the names in nodes list, but init with empty parents list, empty dict
-    bay_node = Node(node, [], {})
+    bay_node = Node(node, [], [])
     bay_net.add_node(bay_node)
 
 
@@ -53,6 +53,7 @@ def set_parents():
             while parent_index < len(sublist):
                 node_el.parents.append(sublist[parent_index])
                 parent_index += 1
+
     # first_sub = [x[0].strip() for x in list_return]
     # print(first_sub)
     # voor elk element in de lijst 'list_return' neem ik de eerste value van het element,
@@ -66,8 +67,23 @@ def set_parents():
 
 def set_prob_tables():
     for probability in probabilities:
-        key = probability[0].strip(" ").split("|")
-        print(key)
+        keys = probability[0].strip(" ").split("|")
+        value = float(probability[1])
+        node = search_node(keys[0][1:])
+        if node.name == keys[0][1:]:
+            node.prob_table.append((keys, value))
+        #    count = 1
+        #     while count < len(keys):
+        #         if keys[0][:1] == '+':
+        #             temp_key = '-' + keys[0][1:]
+        #             temp_key.append(keys[count])
+        #         else:
+        #             temp_key = '+' + keys[0][1:]
+        #             temp_key.append(keys[count])
+        #         count += 1
+        # node.prob_table.append((temp_key, 1-value))
+    print(bay_net)
+
     # for sublist in node_names_unique:
     #     node_el = search_node(sublist[0])
     #     for probability in probabilities:
@@ -89,5 +105,6 @@ def parse_queries():
     pass
 
 
-# set_parents()
+set_parents()
 set_prob_tables()
+# print(bay_net)
