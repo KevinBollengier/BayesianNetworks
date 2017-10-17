@@ -53,11 +53,12 @@ def set_parents():
 
 def set_prob_tables():
     for probability in probabilities:
-        keys = probability[0].strip(" ").split("|")
+        key = probability[0].strip()
+        search_index = probability[0].strip(" ").split("|")
         value = float(probability[1])
-        node = search_node(keys[0][1:])
-        if node.name == keys[0][1:]:
-            node.prob_table.append((keys, value))
+        node = search_node(search_index[0][1:])
+        if node.name == search_index[0][1:]:
+            node.prob_table.append((key, value))
 
 
 def search_node(name)->Node:
@@ -68,24 +69,58 @@ def search_node(name)->Node:
 
 def parse_queries(queries_list):
     for query in queries_list:
-        check_existing_probabilities(query)
+        result = check_existing_probabilities(query)
+        if result == -1:
+            result = find_complement(query)
+        if result == -1:
+            result = enumeration_algorithm(query)
+        print(result)
     pass
 
 
 def check_existing_probabilities(query):
     print(query)
-    pass
+    result = -1.0
+    temp1 = query.replace('+', '')
+    temp1 = temp1.replace('-', '')
+    temp1 = temp1.split('|')
+    node1 = search_node(temp1[0])
+    count = 0
+    while count < len(node1.prob_table):
+        if query == node1.prob_table[count][0]:
+            result = node1.prob_table[count][1]
+        count += 1
+    # for probabs1 in node.prob_table:
+    #     if query in node1.prob_table:
+    #         return node1.prob_table[probabs1]
+    return result
 
 
-def enumeration_algorithm():
-    pass
+def enumeration_algorithm(query):
+    result = -1
+    temp = query.split
+    return result
 
 
-def find_complement():
-    pass
+def find_complement(query):
+    print(query)
+    result = -1
+    temp3 = query.replace('|', '+')
+    temp3 = temp3.replace('-', '+')
+    temp3 = temp3.replace(',', '+')
+    temp3.split('+')
+    node3 = search_node(temp3[0])
+    for probabs3 in node.prob_table:
+        pass
+    return result
 
 
 set_parents()
 set_prob_tables()
-parse_queries(queries)
+
+some_value = check_existing_probabilities("+Rain")
+print(some_value)
+
+# print(bay_net)
+# parse_queries(queries)
 # print(bay_net)
