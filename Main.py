@@ -73,13 +73,13 @@ def parse_queries(queries_list):
         if result == -1:
             result = find_complement(query)
         if result == -1:
-            result = enumeration_algorithm(query)
+            print("Enumeraton not ready")
+            # result = enumeration_algorithm(query)
         print(result)
     pass
 
 
 def check_existing_probabilities(query):
-    print(query)
     result = -1.0
     temp1 = query.replace('+', '')
     temp1 = temp1.replace('-', '')
@@ -90,9 +90,6 @@ def check_existing_probabilities(query):
         if query == node1.prob_table[count][0]:
             result = node1.prob_table[count][1]
         count += 1
-    # for probabs1 in node.prob_table:
-    #     if query in node1.prob_table:
-    #         return node1.prob_table[probabs1]
     return result
 
 
@@ -103,23 +100,29 @@ def enumeration_algorithm(query):
 
 
 def find_complement(query):
-    print(query)
-    result = -1
-    temp3 = query.replace('|', '+')
-    temp3 = temp3.replace('-', '+')
-    temp3 = temp3.replace(',', '+')
-    temp3.split('+')
-    node3 = search_node(temp3[0])
-    for probabs3 in node.prob_table:
-        pass
+    result = -1.0
+    temp1 = query.replace('+', '')
+    temp1 = temp1.replace('-', '')
+    temp1 = temp1.split('|')
+    node1 = search_node(temp1[0])
+    count = 0
+    temptemp = list(query)
+    if temptemp[0] == '-':
+        temptemp[0] = '+'
+    else:
+        temptemp[0] = '-'
+    temptemp = "".join(temptemp)
+    while count < len(node1.prob_table):
+        if temptemp == node1.prob_table[count][0]:
+            result = 1 - node1.prob_table[count][1]
+        count += 1
     return result
 
 
 set_parents()
 set_prob_tables()
 
-some_value = check_existing_probabilities("+Rain")
-print(some_value)
+parse_queries(queries)
 
 # print(bay_net)
 # parse_queries(queries)
