@@ -38,16 +38,16 @@ for node in nodes:
 
 def set_parents():
     for probability in probabilities:
-        hey = probability[0].replace('|', ',')
-        hey = hey.replace('+', ' ')
-        hey = hey.replace('-', ' ')
-        hey = hey.strip(" ")
-        hey = hey.split(", ")
-        node_el = search_node(hey[0])
+        parents = probability[0].replace('|', ',')
+        parents = parents.replace('+', ' ')
+        parents = parents.replace('-', ' ')
+        parents = parents.strip(" ")
+        parents = parents.split(", ")
+        node_el = search_node(parents[0])
         count = 1
-        while count < len(hey):
-            if hey[count] not in node_el.parents:
-                node_el.parents.append(hey[count])
+        while count < len(parents):
+            if parents[count] not in node_el.parents:
+                node_el.parents.append(parents[count])
             count += 1
 
 
