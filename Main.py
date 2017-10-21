@@ -69,12 +69,13 @@ def search_node(name)->Node:
 
 def parse_queries(queries_list):
     for query in queries_list:
+        print(query)
         result = check_existing_probabilities(query)
         if result == -1:
             result = find_complement(query)
         if result == -1:
             print("Enumeraton not ready")
-            # result = enumeration_algorithm(query)
+            result = enumeration_algorithm(query)
         print(result)
     pass
 
@@ -95,7 +96,21 @@ def check_existing_probabilities(query):
 
 def enumeration_algorithm(query):
     result = -1
-    temp = query.split
+    temp_query = query.replace(',', '|')
+    node_list = temp_query.split('|')
+    count = 0
+    while count < len(node_list):
+        node_list[count] = node_list[count].strip('+').strip('-')
+        count = count+1
+    ancestors = node_list
+    parent_list = []
+    for node_name in node_list:
+        snode = search_node(node_name)
+        parent_list.append(snode.parents)
+        for parent in parent_list:
+            if parent.name not in node_list:
+                node_list.append(parent.name)
+    print(parent_list)
     return result
 
 
