@@ -104,13 +104,13 @@ def enumeration_algorithm(query):
         count = count+1
     ancestors = node_list
     parent_list = []
-    for node_name in node_list:
-        snode = search_node(node_name)
+    for node_name in ancestors:
+        snode = ancestors(node_name)
         parent_list.append(snode.parents)
         for parent in parent_list:
-            if parent.name not in node_list:
-                node_list.append(parent.name)
-    print(parent_list)
+            if parent.name not in ancestors:
+                ancestors.append(parent.name)
+    print(ancestors)
     return result
 
 
